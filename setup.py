@@ -8,11 +8,11 @@ setuptools.setup(
     version="0.1.0",
     author="Swarup Ghosh",
     author_email="snwg@live.com",
-    description="",
+    description="Keras callback to log training metrics to a Telegram bot.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/swghosh/keras-telegram-bot",
-    packages=['python-telegram-bot'],
+    packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
