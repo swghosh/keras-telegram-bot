@@ -9,7 +9,10 @@ class KerasTelegramBot(Callback):
         self.user_chat_id = user_chat_id
 
     def on_train_begin(self, logs=None):
-        self.bot.sendMessage(self.user_chat_id, "Training started")
+        try:
+            self.bot.sendMessage(self.user_chat_id, "Training started")
+        except:
+            print("Could not send message")
 
     def on_epoch_end(self, epoch, logs=None):
         metric_names = logs.keys()
@@ -20,4 +23,7 @@ class KerasTelegramBot(Callback):
         message = 'Epoch {}: {}'.format(epoch + 1,
                                         metrics_as_str)
 
-        self.bot.sendMessage(self.user_chat_id, message)
+        try:
+            self.bot.sendMessage(self.user_chat_id, message)
+        except:
+            print("Could not send message")
