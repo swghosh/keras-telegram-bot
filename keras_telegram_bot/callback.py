@@ -8,6 +8,9 @@ class KerasTelegramBot(Callback):
         self.bot = Bot(self.bot_api_token)
         self.user_chat_id = user_chat_id
 
+    def on_train_begin(self, logs=None):
+        self.bot.sendMessage(self.user_chat_id, "Training started")
+
     def on_epoch_end(self, epoch, logs=None):
         metric_names = logs.keys()
         
