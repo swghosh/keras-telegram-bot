@@ -9,19 +9,10 @@ class KerasTelegramBot(Callback):
         self.user_chat_id = user_chat_id
 
     def on_epoch_end(self, epoch, logs=None):
-        metric_names = ['{}_{}'.format('epoch', metric.name)
-                        for metric in self.model.metrics]
-
-        metric_values = {metric: logs[metric] for metric in metric_names}
-
-        has_val = 'val_{}'.format(metric_names[0]) in logs
-        if has_val:
-            for metric in metric_names:
-                val_metric = 'val_{}'.format(metric)
-                metric_values[val_metric] = logs[metric_values]
+        metric_names = logs.keys()
         
-        metrics_as_str = ', '.join(['{}: {}'.format(key, str(metric_values[key]))
-                                    for key in metric_values])
+        metrics_as_str = ', '.join(['{}: {}'.format(key, str(logs[key]))
+                                    for key in metric_names])
 
         message = 'Epoch {}: {}'.format(epoch + 1,
                                         metrics_as_str)
