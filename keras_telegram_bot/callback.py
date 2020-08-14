@@ -26,3 +26,9 @@ class KerasTelegramBot(Callback):
             Bot(self.bot_api_token).sendMessage(self.user_chat_id, message)
         except:
             print("Could not send message")
+
+    def on_train_end(self, logs=None):
+        try:
+            Bot(self.bot_api_token).sendMessage(self.user_chat_id, "Training finished")
+        except:
+            print("Could not send message")
