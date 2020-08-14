@@ -5,12 +5,11 @@ from telegram import Bot
 class KerasTelegramBot(Callback):
     def __init__(self, bot_api_token, user_chat_id):
         self.bot_api_token = bot_api_token
-        self.bot = Bot(self.bot_api_token)
         self.user_chat_id = user_chat_id
 
     def on_train_begin(self, logs=None):
         try:
-            self.bot.sendMessage(self.user_chat_id, "Training started")
+            Bot(self.bot_api_token).sendMessage(self.user_chat_id, "Training started")
         except:
             print("Could not send message")
 
@@ -24,6 +23,6 @@ class KerasTelegramBot(Callback):
                                         metrics_as_str)
 
         try:
-            self.bot.sendMessage(self.user_chat_id, message)
+            Bot(self.bot_api_token).sendMessage(self.user_chat_id, message)
         except:
             print("Could not send message")
